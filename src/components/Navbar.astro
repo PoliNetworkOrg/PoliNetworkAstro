@@ -1,0 +1,107 @@
+---
+import { Languages } from '../utils/types';
+
+export interface Props {
+	show_back_to_home?: boolean;
+    title: string;
+    language: Languages;
+}
+
+const { show_back_to_home = true, title, language } = Astro.props as Props;
+---
+<header>
+    <div class="topbar">
+      {show_back_to_home &&
+        <div class="backToHome">
+          <a href="../"><i class="far fa-arrow-alt-circle-left"></i></a>
+        </div>
+      }
+        <div class="" id="titlecentered">
+            <div class="containerTop">
+                <div class="containertitle">
+                    <p class="ptitle"><b> PoliNetwork</b></p>
+                </div>
+                <div id="navigation" class="containertitle ml12">
+                    <p class="slidernavbar"> -&nbsp; { title }</p>
+                </div>
+            </div>
+        </div>
+        <button
+            class="desktopToggler color-mode__btn light--hidden"
+            aria-label="Toggle light mode"
+            id="darkmodeinputID">
+            { language === Languages.IT &&
+            <>Toggle&nbspLight&nbspMode</>
+            }
+            { language === Languages.EN &&
+            <>Abilita&nbspLight&nbspMode</>
+            }
+            <i class="navbarIcon fas fa-sun"></i>
+          </button>
+          <button
+            class="desktopToggler color-mode__btn dark--hidden"
+            aria-label="Toggle dark mode"
+            id="darkmodeinputID2">
+            { language === Languages.IT &&
+            <>Toggle&nbspLight&nbspMode</>
+            }
+            { language === Languages.EN &&
+            <>Abilita&nbspLight&nbspMode</>
+            }
+            <i class="navbarIcon fas fa-moon"></i>
+          </button>
+          <div class="mobileNightMode">
+            <button
+                class="color-mode__btn light--hidden"
+                aria-label="Toggle light mode"
+                id="darkmodeinputID">
+                <i class="navbarIcon fas fa-sun"></i>
+              </button>
+              <button
+                class="color-mode__btn dark--hidden"
+                aria-label="Toggle dark mode"
+                id="darkmodeinputID2">
+                <i class="navbarIcon fas fa-moon"></i>
+              </button>
+          </div>
+        <!--
+        <div class="darkButton">
+            <div class="switchdiv switchdiva">
+                <p id="darkmode">Enable&nbspDark&nbspMode</p>
+            </div>
+            <div class="switchdiv switchdivb"><label class="theme-switch switch"> <input id="darkmodeinputID" type="checkbox"> <span
+                    class="slider round"></span> </label></div>
+            <div class="dropdown">
+                <button class="dropbtn"><i class="fa fa-bars"></i></button>
+                <div class="dropdown-content">
+                    <div class="ptitlesubcontainer">
+                        <div class="switchdivb">
+                            <p id="darkmode2">Enable&nbspDark&nbspMode</p>
+                        </div>
+                        <div class="switchdivb"><label class="theme-switchb switch"> <input id="darkmodeinputID2" type="checkbox"> <span
+                                class="slider round"></span> </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        -->
+    </div>
+</header>
+
+<script>
+
+  let buttons = document.getElementsByClassName("color-mode__btn");
+  for (var i = 0; i < buttons.length; i++) {
+    buttons[i].addEventListener('click', switchTheme, false);
+  }
+
+  function switchTheme() {
+      if (document.documentElement.getAttribute('data-theme') == null || document.documentElement.getAttribute('data-theme') == 'light') {
+          document.documentElement.setAttribute('data-theme', 'dark');
+      }
+      else {
+          document.documentElement.setAttribute('data-theme', 'light');
+      }
+  }
+</script>

@@ -1,0 +1,53 @@
+---
+import Disclaimer from '../components/Disclaimer.astro';
+import Footer from '../components/Footer.astro';
+import Meta from '../components/Meta.astro';
+import Navbar from '../components/Navbar.astro';
+import type { Languages } from '../utils/types';
+
+export interface Props {
+	title: string;
+	show_back_to_home?: boolean,
+	language: Languages
+}
+
+const { title, show_back_to_home = true, language } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html>
+
+<head>
+	<Meta title = {title}/>
+
+	<!-- MDB -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.3.0/mdb.min.css" rel="stylesheet" />
+
+	<link href="/res/fontawesome/css/all.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="/res/css/style.css">
+	<link rel="stylesheet" type="text/css" href="/res/css/stylenavbar.css">
+
+	<script>
+		var dark_theme = 0;
+		if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+			document.documentElement.setAttribute('data-theme', 'dark');
+			dark_theme = 1;
+		} else {
+			document.documentElement.setAttribute('data-theme', 'light');
+		}
+	</script>
+</head>
+
+<body>
+	<Navbar language={language} title={title} show_back_to_home={show_back_to_home}/>
+	
+	<slot />	
+	
+	<Footer language = {language}/>
+
+	<Disclaimer language = {language}/>
+
+</body>
+
+</html>
+

@@ -1,0 +1,32 @@
+---
+import { Languages } from '../utils/types';
+
+export interface Props {
+	language: Languages;
+}
+
+const url: URL = Astro.url;
+
+const { language } = Astro.props;
+---
+<div class="footerWrapper">
+	<div class="card white footerGrid">
+		<div class="footerSection">
+			<p>
+				<a href="/{{page.Lang}}/learnmore/contacts/" class="polinetworkRedirect">Copyright &copy;
+					<script>document.write(new Date().getFullYear().toString())</script>
+				</a><a href="/" class="polinetworkRedirect"> PoliNetwork</a>
+			</p>
+		</div>
+		<div class="footerSection">
+            { language === Languages.EN &&
+            <a href={url.pathname.replace("/it/", "/en/")}> Passa a
+				<span class="textSecondaryColor"> IT </span></a>
+            }   
+            { language === Languages.IT &&
+            <a href={url.pathname.replace("/en/", "/it/")}> Switch to
+                <span class="textSecondaryColor"> EN </span></a>
+            }   
+		</div>
+	</div>
+</div>
