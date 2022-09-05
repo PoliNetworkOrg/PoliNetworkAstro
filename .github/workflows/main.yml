@@ -1,57 +1,35 @@
-name: CD
+name: Github Pages Astro CI
 
 on:
-  workflow_dispatch:
+  # Trigger the workflow every time you push to the `main` branch
+  # Using a different branch name? Replace `main` with your branch’s name
   push:
-    branches:
-      - master
-      - main
+    branches: [ main ]
+  # Allows you to run this workflow manually from the Actions tab on GitHub.
+  workflow_dispatch:
+  
+# Allow this job to clone the repo and create a page deployment
+permissions:
+  contents: read
+  pages: write
+  id-token: write
 
 jobs:
-  cd:
-    runs-on: ${{ matrix.os }}
-
-    strategy:
-      matrix:
-        os: [ubuntu-latest]
-        node: [16]
-
+  build:
+    runs-on: ubuntu-latest
     steps:
-      - name: 🛎 Checkout
-        uses: actions/checkout@master
+      - name: Checkout your repository using git
+        uses: actions/checkout@v2          
+      - name: Install, build, and upload your site
+        uses: withastro/action@v0
 
-      - name: 🏗 Setup node env
-        uses: actions/setup-node@v2.1.2
-        with:
-          node-version: ${{ matrix.node }}
-          check-latest: true
-
-      - name: 📦 Cache node_modules
-        uses: actions/cache@v2
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
-        
-      - name: 👨🏻‍💻 Install dependencies
-        run: yarn install
-        
-        
-      - name: commit
-        run: | 
-          git config --global user.email "github_bot@github.com"
-          git config --global user.name "Github action"
-          git add .
-          (git commit -m 'push files') || true
-          git pull
-          (git push) || true
-        
-      - name: 👨‍🏭️ Generate
-        run: yarn generate
-
-      - name: 🚀 Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-            github_token: ${{ secrets.GITHUB_TOKEN }}
-            publish_dir: ./dist
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1
