@@ -4,6 +4,9 @@ import Footer from '../components/Footer.astro';
 import Meta from '../components/Meta.astro';
 import Navbar from '../components/Navbar.astro';
 import type { Languages } from '../utils/types';
+import '../styles/global.css';
+import '../styles/fontawesome/css/all.css'
+import '../styles/navbar.css';
 
 export interface Props {
 	title: string;
@@ -20,12 +23,9 @@ const { title, show_back_to_home = true, language } = Astro.props;
 <head>
 	<Meta title = {title}/>
 
+	<meta charset="UTF-8">
 	<!-- MDB -->
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.3.0/mdb.min.css" rel="stylesheet" />
-
-	<link href="/res/fontawesome/css/all.css" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="/res/css/style.css">
-	<link rel="stylesheet" type="text/css" href="/res/css/stylenavbar.css">
 
 	<script>
 		var dark_theme = 0;
