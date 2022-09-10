@@ -1,18 +1,20 @@
 ---
-import { Languages } from '../utils/types';
+import { Languages } from "../utils/types";
 
 export interface Props {
 	language: Languages;
 }
 
-const { language } = Astro.props;
+var { language } = Astro.props;
+var lanString = Languages[language];
 
 const url: URL = Astro.url;
 
-const contacts = "/" + language.toString().toLowerCase() + "/" + "/learnmore/contacts/"
-const aboutus =  "/" + language.toString().toLowerCase() + "/" + "/learnmore/about_us/"
-const official =  "/" + language.toString().toLowerCase() + "/" + "/learnmore/official/"
+const contacts = "/" + lanString.toLowerCase() + "/learnmore/contacts/";
+const aboutus = "/" + lanString.toLowerCase() + "/learnmore/about_us/";
+const official = "/" + lanString.toLowerCase() + "/learnmore/official/";
 ---
+
 <div class="disclamer">
 	<table class="pcenter fullWidth">
 		<tr class="pcenter">
@@ -21,41 +23,40 @@ const official =  "/" + language.toString().toLowerCase() + "/" + "/learnmore/of
 					<tr class="pcenter">
 						<td class="pcenter">
 							<a class="linktextformat" href={contacts}>
-								{ language === Languages.EN &&
-								<p>Contact us</p>
-								}   
-								{ language === Languages.IT &&
-								<p>Contattaci</p>
-								}  
+								{language === Languages.EN && <p>Contact us</p>}
+								{language === Languages.IT && <p>Contattaci</p>}
 							</a>
 						</td>
 						<td>&nbsp;–&nbsp;</td>
 						<td class="pcenter">
 							<a class="linktextformat" href={aboutus}>
-							{ language === Languages.EN &&
-							<p>About us</p>
-							}   
-							{ language === Languages.IT &&
-							<p>Su di noi</p>
-							}
+								{language === Languages.EN && <p>About us</p>}
+								{language === Languages.IT && <p>Su di noi</p>}
 							</a>
 						</td>
 					</tr>
+
+
 				</table>
+				<tr class="pcenter fullWidth">
+					<td class="pcenter fullWidth">
+						<a href={official} style="color: inherit;">
+							{
+								language === Languages.EN && (
+									<p>This website is not affiliated to Politecnico di Milano</p>
+								)
+							}
+							{
+								language === Languages.IT && (
+									<p>Questo sito non è affliliato al Politecnico di Milano</p>
+								)
+							}
+						</a>
+					</td>
+				</tr>
 			</td>
+			<div style="height: 10px;"></div>
 		</tr>
-		<tr class="pcenter fullWidth">
-			<td class="pcenter fullWidth">
-				<a href={official} style="color: inherit;">
-					{ language === Languages.EN &&
-					<p>This website is not affiliated to Politecnico di Milano</p>
-					}   
-					{ language === Languages.IT &&
-					<p>Questo sito non è affliliato al Politecnico di Milano</p>
-					}
-				</a>
-			</td>
-		</tr>
+
 	</table>
-	<div style="height: 10px;"></div>
 </div>
