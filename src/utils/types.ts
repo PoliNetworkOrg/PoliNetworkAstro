@@ -1,5 +1,5 @@
 export enum Languages {
-    IT, EN
+    IT = "it", EN = "en"
   }
 
 export interface LangString{

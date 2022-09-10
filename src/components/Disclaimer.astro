@@ -6,13 +6,12 @@ export interface Props {
 }
 
 var { language } = Astro.props;
-var lanString = Languages[language];
 
 const url: URL = Astro.url;
 
-const contacts = "/" + lanString.toLowerCase() + "/learnmore/contacts/";
-const aboutus = "/" + lanString.toLowerCase() + "/learnmore/about_us/";
-const official = "/" + lanString.toLowerCase() + "/learnmore/official/";
+const contacts = "/" + language + "/learnmore/contacts/";
+const aboutus = "/" + language + "/learnmore/about_us/";
+const official = "/" + language + "/learnmore/official/";
 ---
 
 <div class="disclamer">

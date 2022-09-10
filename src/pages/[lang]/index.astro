@@ -1,0 +1,21 @@
+---
+import Default from "../../layouts/Default.astro";
+import { Languages } from "../../utils/types";
+
+export async function getStaticPaths() {
+    return Object.values(Languages).map((language) => {
+    return {
+      params: { lang: language },
+      props: { language },
+    };
+  });
+}
+
+const { language } = Astro.props;
+---
+
+<Default title="Welcome to Astro." language={ language } show_back_to_home={false}>
+    ciaone<br>
+    ciaone<br>
+    ciaone<br>
+</Default>

@@ -5,13 +5,13 @@ import Default from './Default.astro';
 export interface Props {
 	title: string;
 	language: Languages;
-    url: URL
+    url: URL;
+    show_back_to_home?: boolean
 }
-
-const { title, language } = Astro.props;
+const { title, language, url, show_back_to_home} = Astro.props;
 ---
 
-<Default title={title} language={language}>
+<Default title={title} language={language} show_back_to_home={show_back_to_home}>
     <div
         class="container-fluid p-0"
         style="margin-left: 0px; margin-right: 0px"
@@ -62,12 +62,14 @@ const { title, language } = Astro.props;
 
 </Default>
 
-<script type="text/javascript" define:vars={{ url: URL }}>
+<script type="text/javascript" define:vars={{ url }}>
+    const urlObj = new URL(url)
+    console.log(urlObj)
     var userLang = navigator.language || navigator.userLanguage;
     if (userLang.includes("it")) {
-        url.pathname = "/it" + url.pathname
+        urlObj.pathname = "/it" + urlObj.pathname
     } else {
-        url.pathname = "/en" + url.pathname
+        urlObj.pathname = "/en" + urlObj.pathname
     }
-    window.location.replace(url.pathname);
+    window.location.replace(urlObj.pathname);
 </script>

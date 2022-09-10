@@ -20,11 +20,11 @@ const { language } = Astro.props;
 		</div>
 		<div class="footerSection">
             { language === Languages.EN &&
-            <a href={url.pathname.replace("/it/", "/en/")}> Passa a
+            <a href={url.pathname.replace("/en/", "/it/")}> Passa a
 				<span class="textSecondaryColor"> IT </span></a>
             }   
             { language === Languages.IT &&
-            <a href={url.pathname.replace("/en/", "/it/")}> Switch to
+            <a href={url.pathname.replace("/it/", "/en/")}> Switch to
                 <span class="textSecondaryColor"> EN </span></a>
             }   
 		</div>

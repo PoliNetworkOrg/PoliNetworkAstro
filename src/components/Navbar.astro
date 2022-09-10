@@ -3,8 +3,8 @@ import { Languages } from '../utils/types';
 
 export interface Props {
 	show_back_to_home?: boolean;
-    title: string;
-    language: Languages;
+  title: string;
+  language: Languages;
 }
 
 const { show_back_to_home = true, title, language } = Astro.props as Props;

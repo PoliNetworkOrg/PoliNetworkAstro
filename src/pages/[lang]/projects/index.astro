@@ -1,0 +1,15 @@
+---
+import { Languages } from "../../../utils/types";
+
+export async function getStaticPaths() {
+    return Object.values(Languages).map((language) => {
+    return {
+      params: { lang: language },
+      props: { language },
+    };
+  });
+}
+
+const { language } = Astro.props;
+---
+<div>ciao {language}</div>

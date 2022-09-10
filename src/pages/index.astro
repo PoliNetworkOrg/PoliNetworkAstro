@@ -1,11 +1,13 @@
 ---
 import Default from '../layouts/Default.astro';
-import Card from '../components/Card.astro';
 import {Languages} from '../utils/types'
+import Redirect from '../layouts/Redirect.astro';
+
+
 ---
 
-<Default title="Welcome to Astro." language={Languages.IT}>
+<Redirect title="Welcome to Astro." language={Languages.IT} url={Astro.url} show_back_to_home = { false }>
     ciaone<br>
     ciaone<br>
     ciaone<br>
-</Default>
+</Redirect>
