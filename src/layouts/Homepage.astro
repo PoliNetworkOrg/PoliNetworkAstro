@@ -3,15 +3,143 @@
 import Footer from "../components/Footer.astro";
 import Meta from "../components/Meta.astro";
 import Navbar from "../components/Navbar.astro";
-import type { Languages } from "../utils/types";
+import Socials from "../components/Socials.astro";
+import type { Languages, MultilangString } from "../utils/types";
+import Default from "./Default.astro";
 
 export interface Props {
-	title: string;
-	show_back_to_home?: boolean;
 	language: Languages;
+	info: {
+		title: string[],
+		motto: string[],
+		groups_title: string[],
+	}
 }
 
-const { title, show_back_to_home, language } = Astro.props;
----
+const { language, info } = Astro.props;
 
-<slot />
+console.log("ciao")
+---
+<Default title="Homepage" language={language}>
+<body>
+	<div>
+	  <!--        <div class="ptitlesub">-->
+	  <!--            -->
+	  <!--        </div>-->
+	  <div id="topTitle">
+		<div class="titlecontainer">
+		  <p class="Titolone titlecentered"> { info.title[language] }</p>
+		</div>
+		<div class="devsite-header-billboard-search">
+  
+		  <div class="input-group rounded">
+			<input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" id="searchBarID"
+			  aria-describedby="search-addon" class="searchBox" />
+			<span class="input-group-text border-0" id="search-addon">
+			  <i class="fas fa-search"></i>
+			</span>
+			<div class="searchResults" id="searchContainerID">
+			  <div class="searchBox" id="searchResultsID">
+  
+			  </div>
+			</div>
+		  </div>
+  
+		</div>
+	  </div>
+	</div>
+	<!-- 
+	<div class="wrapper">
+	  <div class="card white section sign">
+		<div class="topCard">
+			<div class="centerGrid logo"><img class="image-container main" src="/img/polinetwork.png"></div>
+			<div class="centerGrid firmaNetwork">
+			  <h1><span class="highlight">P</span>oli<span class="highlight">N</span>etwork</h1>
+			  <p class="pageMotto">{{ page.Lmotto }}</p>
+			</div>
+			<Socials/>
+		  </div>
+	  </div>
+	  <div class="card white section">
+		<div class="cardTitleAndDescription">
+		  <h2>{{ page.LgroupsTitle }}</h2>
+		  <p>{{ page.LgroupsText }}</p>
+		  <p>{{ page.addGroup }} <a href="learnmore/contacts">{{ page.contact }}</a></p>
+		</div>
+		<div class="horizontalSocial">
+		  <div class="card white clickable"
+			onclick="location.href='https://www.facebook.com/groups/matricole20172018polimi/'">
+			<div class="image-container big"><img src="../img/facebook.webp"></div>
+			<p class="pcenter">{{ page.LFacebookTitle }}</p>
+		  </div>
+		  <div class="card white clickable" onclick="location.href='https://t.me/PoliGruppo'">
+			<div class="image-container big"><img src="../img/telegram.webp"></div>
+			<p class="pcenter">{{ page.LTelegramTitle }}</p>
+		  </div>
+		</div>
+		<div class="columnTwo">
+		  <div class="card accent1 clickable courses" onclick="location.href='./groups/'">
+			<p class="pcenter">{{ page.LAllCoursesTitle }}</p>
+		  </div>
+		  <div class="card accent1 clickable groups" onclick="location.href='./extra/'">
+			<p class="pcenter">{{ page.LExtraTitle }}</p>
+		  </div>
+		  <div class="card accent clickable rules" onclick="location.href='./rules/'">
+			<p class="pcenter">{{ page.LRules }}</p>
+		  </div>
+		  <div class="card accent clickable rules"
+			onclick="location.href='./materials/'">
+			<p class="pcenter">{{ page.LMaterials }}</p>
+		  </div>
+		</div>
+		<div class="spaced">
+		  <br />
+		</div>
+	  </div>
+	  <div class="horizontal section">
+		<div class="card white horizontalcardswrapper guides">
+		  <div class="titleanddeskCard">
+			<div class="cardTitleAndDescription">
+			  <h2>{{ page.LGuidesTitle }}</h2>
+			  <p>{{ page.LGuidesText }}</p>
+			</div>
+		  </div>
+		  <div class="expandable">
+			<div class="card accent1 clickable horizontalcardsbutton homepageLowerButton" onclick="location.href='./guides/'">
+			  <p class="cardLink">{{ page.LGuidesButton }}</p>
+			</div>
+		  </div>
+		</div>
+		<div class="card white horizontalcardswrapper projects">
+		  <div class="titleanddeskCard">
+			<div class="cardTitleAndDescription">
+			  <h2>{{ page.LProjectsTitle }}</h2>
+			  <p>{{ page.LProjectsText }}</p>
+			</div>
+		  </div>
+		  <div class="expandable">
+			<div class="card accent1 clickable horizontalcardsbutton homepageLowerButton" onclick="location.href='./projects/'">
+			  <p class="cardLink">{{ page.LProjectsButton }}</p>
+			</div>
+		  </div>
+		</div>
+		<div class="card white horizontalcardswrapper info">
+		  <div class="titleanddeskCard">
+			<div class="cardTitleAndDescription">
+			  <h2>{{ page.LInfoTitle }}</h2>
+			  <p>{{ page.LInfoText }}</p>
+			</div>
+		  </div>
+		  <div class="expandable">
+			<div class="card accent1 clickable horizontalcardsbutton homepageLowerButton" onclick="location.href='./learnmore/'">
+			  <p class="cardLink">{{ page.LInfoButton }}</p>
+			</div>
+		  </div>
+		</div>
+	  </div>
+	</div>
+	<script src="/res/js/search/search.js"></script>
+	<script src="/res/js/search/search_utils.js"></script>
+	-->
+  </body>
+</Default>

@@ -1,9 +1,11 @@
 ---
 import Default from "../../layouts/Default.astro";
-import { Languages } from "../../utils/types";
+import Homepage from "../../layouts/Homepage.astro";
+import { Languages, MultilangString } from "../../utils/types";
 
 export async function getStaticPaths() {
-    return Object.values(Languages).map((language) => {
+  console.log(Languages.values())
+    return Languages.values().map((language) => {
     return {
       params: { lang: language },
       props: { language },
@@ -14,8 +16,8 @@ export async function getStaticPaths() {
 const { language } = Astro.props;
 ---
 
-<Default title="Welcome to Astro." language={ language } show_back_to_home={false}>
-    ciaone<br>
-    ciaone<br>
-    ciaone<br>
-</Default>
+<Homepage language={ language } info={ {
+  title: ["ciao", "hello"],
+  motto: ["ciao", "hello"],
+  groups_title: ["ciao", "hello"],
+}}/>

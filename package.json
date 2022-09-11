@@ -10,10 +10,7 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^1.1.5",
-    "js-yaml": "^4.1.0"
+    "astro": "^1.1.5"
   },
-  "devDependencies": {
-    "@types/js-yaml": "^4.0.5"
-  }
+  "devDependencies": {}
 }

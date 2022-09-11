@@ -1,27 +1,50 @@
 export enum Languages {
-    IT = "it", EN = "en"
+    IT = 0, EN = 1
   }
 
-export interface LangString{
-  string: string,
-  language: Languages
+export namespace Languages {
+    export function toString(language: Languages): string {
+        return Languages.values()[language].toLowerCase();
+    }
+
+    export function parse(language: string): Languages {
+        return Languages.values().indexOf(language)
+    }
+
+    export function values(): string[]{
+      return (Object.values(Languages).filter(value => typeof value === 'string') as string[]).map(element => {
+        return element.toLowerCase()
+      });
+    }
+    
 }
 
-export interface Project {
-  title: string,
-  page_titles: LangString[],
-  img: string,
-  subtitles: LangString[],
-  cards: Card[]
-}
+export class MultilangString {
+  readonly _langString: Map<Languages, string>; 
+  
+  constructor(langStrings: {string: string, language: Languages}[]){
+    if(langStrings == null || langStrings.length == 0){
+      throw Error("Language array cannot be null or empty")
+    }
+    this._langString = new Map<Languages, string>();
+    langStrings.map((language) => {
+      this._langString.set(language.language, language.string)
+    })
+  }
 
-interface Card {
-  title: LangString[],
-  desc: LangString[],
-  link: string,
-  img: string,
-}
-
-interface Button {
-
+  get(language: Languages): string {
+    const toReturn = this._langString.get(language);
+    if (toReturn != undefined){
+      return toReturn
+    } else {
+      const eng = this._langString.get(Languages.EN);
+      if (eng != undefined){
+        return eng
+      }
+      else {
+        const [firstElement] = this._langString.values()
+        return firstElement;
+      }
+    }
+  }
 }
