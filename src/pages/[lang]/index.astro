@@ -1,10 +1,11 @@
 ---
+import Search from "../../components/Search.astro";
+import Socials from "../../components/Socials.astro";
 import Default from "../../layouts/Default.astro";
-import Homepage from "../../layouts/Homepage.astro";
 import { Languages, MultilangString } from "../../utils/types";
 
+
 export async function getStaticPaths() {
-  console.log(Languages.values())
     return Languages.values().map((language) => {
     return {
       params: { lang: language },
@@ -13,11 +14,148 @@ export async function getStaticPaths() {
   });
 }
 
+const info = {
+		add_groups: ["ciao", "hello"],
+		contacts: ["ciao", "hello"],
+		facebook_title: ["ciao", "hello"],
+		telegram_title: ["ciao", "hello"],
+		all_courses_title: ["ciao", "hello"],
+		extra_title: ["ciao", "hello"],
+		rules: ["ciao", "hello"],
+		materials: ["ciao", "hello"],
+		guides_title: ["ciao", "hello"],
+		groups_text: ["ciao", "hello"],
+		guides_button: ["ciao", "hello"],
+		projects_title: ["ciao", "hello"],
+		projects_text: ["ciao", "hello"],
+		projects_button: ["ciao", "hello"],
+		info_title: ["ciao", "hello"],
+		info_text: ["ciao", "hello"],
+		info_button: ["ciao", "hello"],
+		title: ["ciao", "hello"],
+		motto: ["ciao", "hello"],
+		groups_title: ["ciao", "hello"],
+	}
+
 const { language } = Astro.props;
+
+const langCode = Languages.toNum(language);
 ---
 
-<Homepage language={ language } info={ {
-  title: ["ciao", "hello"],
-  motto: ["ciao", "hello"],
-  groups_title: ["ciao", "hello"],
-}}/>
+<Default title="Homepage" language={language}>
+  <body>
+    <div>
+      <div id="topTitle">
+      <div class="titlecontainer">
+        <p class="Titolone titlecentered"> { info.title[langCode] }</p>
+      </div>
+      <div class="devsite-header-billboard-search">
+    
+        <div class="input-group rounded">
+        <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" id="searchBarID"
+          aria-describedby="search-addon" class="searchBox" />
+        <span class="input-group-text border-0" id="search-addon">
+          <i class="fas fa-search"></i>
+        </span>
+        <div class="searchResults" id="searchContainerID">
+          <div class="searchBox" id="searchResultsID">
+    
+          </div>
+        </div>
+        </div>
+    
+      </div>
+      </div>
+    </div> 
+    <div class="wrapper">
+      <div class="card white section sign">
+      <div class="topCard">
+        <div class="centerGrid logo"><img class="image-container main" src="/img/polinetwork.png"></div>
+        <div class="centerGrid firmaNetwork">
+          <h1><span class="highlight">P</span>oli<span class="highlight">N</span>etwork</h1>
+          <p class="pageMotto">{ info.motto[langCode] }</p>
+        </div>
+        <Socials/>
+        </div>
+      </div>
+      <div class="card white section">
+      <div class="cardTitleAndDescription">
+        <h2>{ info.groups_title[langCode] }</h2>
+        <p>{ info.groups_text[langCode] }</p>
+        <p>{ info.add_groups[langCode]} <a href="learnmore/contacts">{ info.contacts[langCode]}</a></p>
+      </div>
+      <div class="horizontalSocial">
+        <div class="card white clickable"
+        onclick="location.href='https://www.facebook.com/groups/matricole20172018polimi/'">
+        <div class="image-container big"><img src="/img/facebook.webp"></div>
+        <p class="pcenter">{ info.facebook_title[langCode] }</p>
+        </div>
+        <div class="card white clickable" onclick="location.href='https://t.me/PoliGruppo'">
+        <div class="image-container big"><img src="/img/telegram.webp"></div>
+        <p class="pcenter">{ info.telegram_title[langCode]}</p>
+        </div>
+      </div>
+      <div class="columnTwo">
+        <div class="card accent1 clickable courses" onclick="location.href='./groups/'">
+        <p class="pcenter">{ info.all_courses_title[langCode] }</p>
+        </div>
+        <div class="card accent1 clickable groups" onclick="location.href='./extra/'">
+        <p class="pcenter">{ info.extra_title[langCode] }</p>
+        </div>
+        <div class="card accent clickable rules" onclick="location.href='./rules/'">
+        <p class="pcenter">{ info.rules[langCode] }</p>
+        </div>
+        <div class="card accent clickable rules"
+        onclick="location.href='./materials/'">
+        <p class="pcenter">{ info.materials[langCode] }</p>
+        </div>
+      </div>
+      <div class="spaced">
+        <br />
+      </div>
+      </div>
+      <div class="horizontal section">
+      <div class="card white horizontalcardswrapper guides">
+        <div class="titleanddeskCard">
+        <div class="cardTitleAndDescription">
+          <h2>{ info.guides_title[langCode] }</h2>
+          <p>{ info.groups_text[langCode] }</p>
+        </div>
+        </div>
+        <div class="expandable">
+        <div class="card accent1 clickable horizontalcardsbutton homepageLowerButton" onclick="location.href='./guides/'">
+          <p class="cardLink">{ info.guides_button[langCode]}</p>
+        </div>
+        </div>
+      </div>
+      <div class="card white horizontalcardswrapper projects">
+        <div class="titleanddeskCard">
+        <div class="cardTitleAndDescription">
+          <h2>{ info.projects_title[langCode] }</h2>
+          <p>{ info.projects_text[langCode] }</p>
+        </div>
+        </div>
+        <div class="expandable">
+        <div class="card accent1 clickable horizontalcardsbutton homepageLowerButton" onclick="location.href='./projects/'">
+          <p class="cardLink">{ info.projects_button[langCode]}</p>
+        </div>
+        </div>
+      </div>
+      <div class="card white horizontalcardswrapper info">
+        <div class="titleanddeskCard">
+        <div class="cardTitleAndDescription">
+          <h2>{ info.info_title[langCode] }</h2>
+          <p>{ info.info_text[langCode]}</p>
+        </div>
+        </div>
+        <div class="expandable">
+        <div class="card accent1 clickable horizontalcardsbutton homepageLowerButton" onclick="location.href='./learnmore/'">
+          <p class="cardLink">{ info.info_button[langCode] }</p>
+        </div>
+        </div>
+      </div>
+      </div>
+    </div>
+    <Search />
+    </body>
+  </Default>

@@ -1,19 +1,17 @@
 ---
-import { Languages } from "../utils/types";
+import { Languages } from '../utils/types';
 
 export interface Props {
 	language: Languages;
 }
 
-var { language } = Astro.props;
 
-const url: URL = Astro.url;
+const { language } = Astro.props;
 
 const contacts = "/" + language + "/learnmore/contacts/";
-const aboutus = "/" + language + "/learnmore/about_us/";
+const about_us = "/" + language + "/learnmore/about_us/";
 const official = "/" + language + "/learnmore/official/";
 ---
-
 <div class="disclamer">
 	<table class="pcenter fullWidth">
 		<tr class="pcenter">
@@ -22,20 +20,16 @@ const official = "/" + language + "/learnmore/official/";
 					<tr class="pcenter">
 						<td class="pcenter">
 							<a class="linktextformat" href={contacts}>
-								{language === Languages.EN && <p>Contact us</p>}
-								{language === Languages.IT && <p>Contattaci</p>}
+								{language === Languages.EN ? <p>Contact us</p> : <p>Contattaci</p>}
 							</a>
 						</td>
 						<td>&nbsp;–&nbsp;</td>
 						<td class="pcenter">
-							<a class="linktextformat" href={aboutus}>
-								{language === Languages.EN && <p>About us</p>}
-								{language === Languages.IT && <p>Su di noi</p>}
+							<a class="linktextformat" href={about_us}>
+								{language === Languages.EN ? <p>About us</p> : <p>Su di noi</p>}
 							</a>
 						</td>
 					</tr>
-
-
 				</table>
 				<tr class="pcenter fullWidth">
 					<td class="pcenter fullWidth">

@@ -1,14 +1,10 @@
 export enum Languages {
-    IT = 0, EN = 1
+    IT = "it", EN = "en"
   }
 
 export namespace Languages {
-    export function toString(language: Languages): string {
-        return Languages.values()[language].toLowerCase();
-    }
-
-    export function parse(language: string): Languages {
-        return Languages.values().indexOf(language)
+    export function toNum(language: Languages): number {
+      return Languages.values().indexOf(language)
     }
 
     export function values(): string[]{
