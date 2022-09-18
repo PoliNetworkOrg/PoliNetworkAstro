@@ -1,19 +1,21 @@
 ---
 import { Languages } from "../../../utils/types";
+import { parseFrontmatter } from "../../../utils/utils";
 
 export async function getStaticPaths() {
-    const pages = [ "1", "2" ];
-
+    const projects = await Astro.glob('/src/data/projects/*.md');
     return Languages.values().map((language) => {
-        return pages.map((text) => {
+        return projects.map((project) => {
             return {
-                params: { lang: language, projects: text },
-                props: { language: language, text },
+                params: { lang: language, projects: project.frontmatter.slug },
+                props: { language: language, projectRaw: project },
                 };
         })
   });
 }
 
-const { language, text } = Astro.props;
+const { language, projectRaw } = Astro.props;
+const project = parseFrontmatter(projectRaw.frontmatter, language)
+
 ---
-<div>ciao {language}:{text}</div>
+<div>ciao {language}:{project.info.descriptions.description}</div>
