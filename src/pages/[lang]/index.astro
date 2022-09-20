@@ -35,14 +35,14 @@ const info = {
 		title: ["ciao", "hello"],
 		motto: ["ciao", "hello"],
 		groups_title: ["ciao", "hello"],
-	}
+  }
 
 const { language } = Astro.props;
 
 const langCode = Languages.toNum(language);
 ---
 
-<Default title="Homepage" language={language}>
+<Default title="Homepage" language={language} show_back_to_home={false}>
   <body>
     <div>
       <div id="topTitle">

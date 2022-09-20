@@ -1,0 +1,44 @@
+---
+import ContentButton from "../../../components/ContentButton.astro";
+import Default from "../../../layouts/Default.astro";
+import { Languages } from "../../../utils/types";
+
+export async function getStaticPaths() {
+    return Languages.values().map((language) => {
+    return {
+      params: { lang: language },
+      props: { language },
+    };
+  });
+}
+
+const buttons = [
+    {
+        title: ["ciao", "hello"],
+        description: ["ciao", "hello"],
+        url: "",
+        img: ""
+    },
+    {
+        title: ["ciao", "hello"],
+        description: ["ciao", "hello"],
+        url: "",
+        img: ""
+    },
+    {
+        title: ["ciao", "hello"],
+        description: ["ciao", "hello"],
+        url: "",
+        img: ""
+    },
+]
+
+const { language } = Astro.props;
+
+const langCode = Languages.toNum(language);
+---
+<Default title="learnmore" language={language}>
+    {buttons.map((button) => {
+        return <ContentButton title={button.title[langCode]} desc={button.description[langCode]} url={button.url}/>
+    })}
+</Default>

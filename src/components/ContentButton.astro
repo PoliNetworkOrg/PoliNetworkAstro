@@ -1,0 +1,22 @@
+---
+export interface Props {
+	title: string;
+	desc: string;
+	url: string;
+	icon?: string;
+}
+
+const { icon, title, desc, url } = Astro.props;
+---
+
+<div class="cardButton project white horizontalcardswrapper prjectClickable">
+	<a href={url} class="bigButtonLink">
+	  {icon && 
+		<i class="bigButtonIcon {{ include.icon }}"></i>
+	  }
+	  <div class="project-content bigButtonText">
+		  <h2>{ title }</h2>
+		  <p> { desc } </p>
+	  </div>
+	  </a>
+  </div>
