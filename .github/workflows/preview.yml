@@ -40,5 +40,5 @@ jobs:
         uses: thollander/actions-comment-pull-request@v1
         with:
           message: |
-            Hello world ${{ env.PR_ENV }}! :wave:
+            Check the PR preview [here](${{ env.PR_ENV }})! :wave:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
