@@ -32,7 +32,8 @@ jobs:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
             sudo apt install jq
-            id=$(polinetworkpr.github.io/repos/${{ github.repository }}/actions/runs/${{ github.run_id }}/artifacts | jq -r '.[].id')
+            id=$(polinetworkpr.github.io/repos/${{ github.repository }}/actions/runs/${{ github.run_id }}/artifacts)
+            echo $id
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
