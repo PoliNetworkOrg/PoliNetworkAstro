@@ -27,7 +27,11 @@ jobs:
         with:
           name: preview
           path: dist/
-      - run: |
+  retrieve_artifact:
+      runs-on: ubuntu-latest
+      steps:
+      - name: script
+        run: |
           id=$(curl -s -H "Accept: application/vnd.github+json" -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/repos/${{ github.repository }}/actions/artifacts)
           echo $id
           github.rest.issues.createComment({
