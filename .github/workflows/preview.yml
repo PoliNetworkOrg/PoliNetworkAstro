@@ -29,7 +29,7 @@ jobs:
           path: dist/
       - run: |
           sudo apt install jq
-          id=$(polinetworkpr.github.io/repos/${{ github.repository }}/actions/runs/${{ github.run_id }}/artifacts)
+          id=$(curl -s -H "Accept: application/vnd.github+json" -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/repos/${{ github.repository }}/actions/runs/${{ github.run_id }}/artifacts | jq -c '.id')
           echo $id
           github.rest.issues.createComment({
             issue_number: context.issue.number,
