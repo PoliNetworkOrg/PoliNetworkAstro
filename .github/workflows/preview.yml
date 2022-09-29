@@ -31,9 +31,11 @@ jobs:
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
+            sudo apt install jq
+            id=$(polinetworkpr.github.io/repos/${{ github.repository }}/actions/runs/${{ github.run_id }}/artifacts | jq -r '.[].id')
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: '👋 Thanks for reporting!'
+              body: 'Find the preview [here](polinetworkpr.github.io/$id)'
             })
