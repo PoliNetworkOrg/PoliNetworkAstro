@@ -1,0 +1,22 @@
+---
+import Footer from '../components/Footer.astro';
+import Meta from '../components/Meta.astro';
+import Navbar from '../components/Navbar.astro';
+import Disclaimer from '../components/Disclaimer.astro';
+import Default from './Default.astro';
+
+import type { Languages } from '../utils/types';
+
+export interface Props {
+	title: string;
+	show_back_to_home?: boolean,
+	language: Languages
+}
+
+const { title, show_back_to_home, language } = Astro.props;
+---
+
+<Default title={title} language={language}>
+	<Navbar title={title} language={language} />
+	<slot/>
+</Default>
