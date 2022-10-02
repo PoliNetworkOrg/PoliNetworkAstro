@@ -1,5 +1,7 @@
 ---
 import { Languages } from "../../../utils/types";
+import { parseFrontmatter } from "../../../utils/utils";
+import Default from "../../../layouts/Default.astro";
 
 export async function getStaticPaths() {
     return Languages.values().map((language) => {
@@ -11,5 +13,16 @@ export async function getStaticPaths() {
 }
 
 const { language } = Astro.props;
+
+const projectsRaw = await Astro.glob('/src/data/projects/*.md');
+const projects = projectsRaw.map((project) => {
+  return parseFrontmatter(project.frontmatter, language)
+})
 ---
-<div>ciao {language}</div>
+<Default title="projects" language={language}>
+  
+<div>ciao {language} {projects.map((project) => {
+  return <>{JSON.stringify(project)}</>
+})}</div>
+
+</Default>

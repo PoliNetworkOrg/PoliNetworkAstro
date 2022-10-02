@@ -1,4 +1,5 @@
 ---
+import Default from "../../../layouts/Default.astro";
 import { Languages } from "../../../utils/types";
 import { parseFrontmatter } from "../../../utils/utils";
 
@@ -18,4 +19,6 @@ const { language, projectRaw } = Astro.props;
 const project = parseFrontmatter(projectRaw.frontmatter, language)
 
 ---
-<div>ciao {language}:{project.info.descriptions.description}</div>
+<Default title="projects" language={language}>
+    <div>ciao {language}:{project.info.descriptions.description}</div>
+</Default>
