@@ -16,14 +16,14 @@ const { title, show_back_to_home, language } = Astro.props;
 ---
 
 <!DOCTYPE html>
-<html>
+<html class="h-full">
 
 <head>
 	<Meta title = {title}/>
 
 </head>
 
-<body>
+<body class="h-full">
 
 	<slot/>
 
@@ -32,12 +32,11 @@ const { title, show_back_to_home, language } = Astro.props;
 </html>
 
 <script>
-	var dark_theme = 0;
-	if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-		document.documentElement.setAttribute('data-theme', 'dark');
-		dark_theme = 1;
-	} else {
-		document.documentElement.setAttribute('data-theme', 'light');
-	}
+    // On page load or when changing themes, best to add inline in `head` to avoid FOUC
+    if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+    } else {
+        document.documentElement.classList.remove('dark')
+    }
 </script>
 
