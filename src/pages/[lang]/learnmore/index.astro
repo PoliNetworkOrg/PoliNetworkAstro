@@ -1,5 +1,7 @@
 ---
 import ContentButton from "../../../components/ContentButton.astro";
+import NavigationButton from "../../../components/NavigationButton.astro";
+import Basics from "../../../layouts/Basics.astro";
 import Default from "../../../layouts/Default.astro";
 import { Languages } from "../../../utils/types";
 
@@ -15,30 +17,32 @@ export async function getStaticPaths() {
 const buttons = [
     {
         title: ["ciao", "hello"],
-        description: ["ciao", "hello"],
+        desc: ["ciao", "hello"],
+        url: "",
+        img: "fa-solid fa-o"
+    },
+    {
+        title: ["ciao", "hello"],
+        desc: ["ciao", "hello"],
         url: "",
         img: ""
     },
     {
         title: ["ciao", "hello"],
-        description: ["ciao", "hello"],
-        url: "",
-        img: ""
-    },
-    {
-        title: ["ciao", "hello"],
-        description: ["ciao", "hello"],
+        desc: ["ciao", "hello"],
         url: "",
         img: ""
     },
 ]
 
+
+
 const { language } = Astro.props;
 
 const langCode = Languages.toNum(language);
 ---
-<Default title="learnmore" language={language}>
+<Basics title="learnmore" language={language}>
     {buttons.map((button) => {
-        return <ContentButton title={button.title[langCode]} desc={button.description[langCode]} url={button.url}/>
+        return <NavigationButton href={button.url} title={button.title[langCode]} body={button.desc[langCode]} img={button.img}></NavigationButton>
     })}
-</Default>
+</Basics>
